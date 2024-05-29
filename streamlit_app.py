@@ -17,8 +17,8 @@ st.write("The name on your smoothie will be: ", title)
 cnx=st.connection("snowflake")
 session = cnx.session()
 my_dataframe = session.table("smoothies.public.fruit_options").select(col('FRUIT_NAME'),col('SEARCH_ON'))
-st.dataframe(data=my_dataframe, use_container_width=True)
-st.stop()
+#st.dataframe(data=my_dataframe, use_container_width=True)
+#st.stop()
 
 pd_df=my_dataframe.to_pandas()
 #st.dataframe(pd_df)
@@ -39,6 +39,7 @@ if ingredients_list:
       
       st.subheader=(fruit_chosen + 'Nutrition Information')
       fruityvice_response = requests.get("https://fruityvice.com/api/fruit/" + fruit_chosen)
+      
       vf_df=st.dataframe(data=fruityvice_response.json(), use_container_width=True)
 
   my_insert_stmt = """ insert into smoothies.public.orders(ingredients,name_on_order)
